@@ -12,6 +12,8 @@ app.use(
 );
 
 // loading Router
+const person = require('./routes/personRoute');
 
+app.use('/api/v1', person);
 // exporting the app instance
 module.exports = app;
