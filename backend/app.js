@@ -12,9 +12,12 @@ app.use(
 );
 
 // loading Router
-const person = require('./routes/personRoute');
-const order = require('./routes/orderRoute')
-app.use('/api/v1', person);
-app.use('/api/v1', order);
+const person = require("./routes/personRoute");
+const order = require("./routes/orderRoute");
+const auth = require("./routes/authRoute.js");
+app.use("/api/v1", person);
+app.use("/api/v1", order);
+app.use("/api/v1", auth);
+
 // exporting the app instance
 module.exports = app;
