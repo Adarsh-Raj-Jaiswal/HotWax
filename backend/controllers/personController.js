@@ -32,7 +32,7 @@ exports.updatePerson = async (req, res) => {
       MARITAL_STATUS_ENUM_ID = ?,
       EMPLOYMENT_STATUS_ENUM_ID = ?,
       OCCUPATION = ?
-    WHERE PARTY_ID = ?;
+    WHERE PARTY_ID = ?
     ` , [salutation, first_name, middle_name, last_name, gender, birth_date, marital_status, empl_status, occupation,partyId]);
     res.send(rows);
 };

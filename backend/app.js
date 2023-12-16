@@ -13,7 +13,8 @@ app.use(
 
 // loading Router
 const person = require('./routes/personRoute');
-
+const order = require('./routes/orderRoute')
 app.use('/api/v1', person);
+app.use('/api/v1', order);
 // exporting the app instance
 module.exports = app;
