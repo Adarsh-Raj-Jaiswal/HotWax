@@ -53,4 +53,46 @@ exports.createOrder = async (req, res) => {
   res.send(rows);
 };
 
-exports.updateOrder = async () => {};
+exports.updateOrder = async (req, res) => {
+  const order_id = req.params.id;
+  const {
+    order_name,
+    placed_date,
+    aprv_date,
+    status_id,
+    currency,
+    prod_store_id,
+    sales_channel,
+    grand_total,
+    completed_date,
+  } = req.body;
+
+  const [rows] = await pool.query(
+    `UPDATE order_header
+    SET
+    ORDER_NAME=?, 
+    PLACED_DATE=?, 
+    APPROVED_DATE=?, 
+    STATUS_ID=?, 
+    CURRENCY_UOM_ID=?, 
+    PRODUCT_STORE_ID=?,
+     SALES_CHANNEL_ENUM_ID=?, 
+    GRAND_TOTAL=?,
+    COMPLETED_DATE=?
+    WHERE order_id = ?
+    `,
+    [
+      order_name,
+      placed_date,
+      aprv_date,
+      status_id,
+      currency,
+      prod_store_id,
+      sales_channel,
+      grand_total,
+      completed_date,
+      order_id,
+    ]
+  );
+  res.send(rows);
+};
