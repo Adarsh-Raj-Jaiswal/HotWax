@@ -7,7 +7,7 @@ const {
 const router = express.Router();
 
 router.route("/person/:id").get(getPerson);
-router.route("/person/new").post(createPerson);
-router.route("/person/update").put(updatePerson);
+router.route("/person/new/:id").post(createPerson);
+router.route("/person/update/:id").put(updatePerson);
 
 module.exports = router;

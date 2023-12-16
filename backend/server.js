@@ -26,8 +26,8 @@ dotenv.config(
 );
 
 // creating a connection to the database
-const connectDatabase = require("./config/database");
-const pool = connectDatabase(); // calling function to create connection
+// const connectDatabase = require("./config/database");
+// const pool = connectDatabase(); // calling function to create connection
 
 const server = app.listen(
   // this method is used to start the server
@@ -57,4 +57,4 @@ process.on("unhandledRejection", (err) => {
   );
 });
 
-module.exports = pool;
+// module.exports = pool;
