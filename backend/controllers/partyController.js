@@ -4,7 +4,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 exports.getParties = catchAsyncErrors(async (req, res) => {
   const [Parties] = await pool.query(`SELECT * FROM party`);
   const Lenght = Parties.length;
-  res.send({
+  res.status(200).send({
     Lenght,
     Parties,
   });
@@ -15,5 +15,5 @@ exports.createParty = catchAsyncErrors(async (req, res) => {
   const [rows] = await pool.query(`INSERT INTO party (party_id) VALUES (?)`, [
     party_id,
   ]);
-  res.send(rows);
+  res.status(201).send(rows);
 });

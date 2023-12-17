@@ -11,8 +11,8 @@ exports.getAllOrders = catchAsyncErrors(async (req, res) => {
     const credit_card = cryptr.decrypt(Orders[i].CREDIT_CARD);
     Orders[i].CREDIT_CARD = credit_card;
   }
-  
-  res.send({
+
+  res.status(200).send({
     Length,
     Orders,
   });
@@ -28,7 +28,7 @@ exports.getOrder = catchAsyncErrors(async (req, res) => {
   const credit_card = cryptr.decrypt(order.CREDIT_CARD);
   order.CREDIT_CARD = credit_card;
   delete order.ORDER_ID;
-  res.send(order);
+  res.status(200).send(order);
 });
 
 exports.createOrder = catchAsyncErrors(async (req, res) => {
@@ -81,7 +81,7 @@ exports.createOrder = catchAsyncErrors(async (req, res) => {
       encryptCreditCard,
     ]
   );
-  res.send(rows);
+  res.status(201).send(rows);
 });
 
 exports.updateOrder = catchAsyncErrors(async (req, res) => {
@@ -114,5 +114,5 @@ exports.updateOrder = catchAsyncErrors(async (req, res) => {
       order_id,
     ]
   );
-  res.send(rows);
+  res.status(200).send(rows);
 });

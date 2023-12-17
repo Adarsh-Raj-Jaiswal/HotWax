@@ -5,7 +5,7 @@ const sendToken = require("../utils/jwtToken");
 exports.getPersons = catchAsyncErrors(async (req, res) => {
   const [Persons] = await pool.query(`SELECT * FROM person`);
   const Length = Persons.length;
-  res.send({
+  res.status(200).send({
     Length,
     Persons,
   });
@@ -16,7 +16,7 @@ exports.getPerson = catchAsyncErrors(async (req, res) => {
   const [rows] = await pool.query(`SELECT * FROM person WHERE party_id = ?`, [
     id,
   ]);
-  res.send(rows[0]);
+  res.status(200).send(rows[0]);
 });
 
 exports.createPerson = catchAsyncErrors(async (req, res) => {
@@ -24,7 +24,7 @@ exports.createPerson = catchAsyncErrors(async (req, res) => {
   const [rows] = await pool.query(`INSERT INTO person (PARTY_ID)VALUES (?);`, [
     partyId,
   ]);
-  sendToken(rows, 200, res);
+  sendToken(rows, 201, res);
 });
 
 exports.updatePerson = catchAsyncErrors(async (req, res) => {
@@ -55,5 +55,5 @@ exports.updatePerson = catchAsyncErrors(async (req, res) => {
       partyId,
     ]
   );
-  res.send(rows);
+  res.status(200).send(rows);
 });
