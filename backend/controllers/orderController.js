@@ -96,11 +96,13 @@ exports.updateOrder = catchAsyncErrors(async (req, res) => {
     sales_channel,
     grand_total,
     completed_date,
+    credit_card,
   } = req.body;
+  const encryptCreditCard = cryptr.encrypt(credit_card);
   const [rows] = await pool.query(
     `UPDATE order_header SET
     ORDER_NAME=?,PLACED_DATE=?,APPROVED_DATE=?,STATUS_ID=?,CURRENCY_UOM_ID=?,PRODUCT_STORE_ID=?,
-    SALES_CHANNEL_ENUM_ID=?,GRAND_TOTAL=?,COMPLETED_DATE=? WHERE order_id=?`,
+    SALES_CHANNEL_ENUM_ID=?,GRAND_TOTAL=?,COMPLETED_DATE=?,CREDIT_CARD=? WHERE order_id=?`,
     [
       order_name,
       placed_date,
@@ -111,6 +113,7 @@ exports.updateOrder = catchAsyncErrors(async (req, res) => {
       sales_channel,
       grand_total,
       completed_date,
+      encryptCreditCard,
       order_id,
     ]
   );

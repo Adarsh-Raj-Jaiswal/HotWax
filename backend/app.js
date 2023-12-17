@@ -19,11 +19,11 @@ app.use(
 // loading Router
 const person = require("./routes/personRoute");
 const order = require("./routes/orderRoute");
-const auth = require("./routes/authRoute.js");
+// const auth = require("./routes/authRoute.js");
 const party = require("./routes/partyRoute.js");
 app.use("/api/v1", person);
 app.use("/api/v1", order);
-app.use("/api/v1", auth);
+// app.use("/api/v1", auth);
 app.use("/api/v1", party);
 
 // error handling middleware
