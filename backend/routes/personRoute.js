@@ -1,4 +1,5 @@
 const express = require("express");
+const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
 const {
   getPerson,
@@ -9,9 +10,11 @@ const {
 
 const router = express.Router();
 
-router.route("/person/:id").get(getPerson);
-router.route("/persons").get(getPersons);
+router
+  .route("/persons")
+  .get(isAuthenticatedUser, authorizeRoles("admin"), getPersons);
+router.route("/person/:id").get(isAuthenticatedUser, getPerson);
+router.route("/person/update/:id").put(isAuthenticatedUser, updatePerson);
 router.route("/person/new/:id").post(createPerson);
-router.route("/person/update/:id").put(updatePerson);
 
 module.exports = router;

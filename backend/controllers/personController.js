@@ -1,5 +1,6 @@
 const pool = require("../config/database");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const sendToken = require("../utils/jwtToken");
 
 exports.getPersons = catchAsyncErrors(async (req, res) => {
   const [Persons] = await pool.query(`SELECT * FROM person`);
@@ -23,7 +24,7 @@ exports.createPerson = catchAsyncErrors(async (req, res) => {
   const [rows] = await pool.query(`INSERT INTO person (PARTY_ID)VALUES (?);`, [
     partyId,
   ]);
-  res.send(rows);
+  sendToken(rows, 200, res);
 });
 
 exports.updatePerson = catchAsyncErrors(async (req, res) => {
